@@ -11,7 +11,7 @@ router.get('/my', function(req, res, next) {
 });
 
 router.get('/list/my', function (req, res) {
-  res.send('{"list": [{"name": "name1", "value": "value1"}, {"name": "name2", "value": "value2"}]}');
+  res.json(["Milk", "Onion", "Juice", "Bread"]);
 });
 
 

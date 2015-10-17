@@ -1,16 +1,22 @@
 
 $(document).ready(function () {
 		
+	// Dynamically generate list
 	(function () {
 		$('main ul li').remove();
-		$('main ul').append(getListItem(1, "Milk"));
-		$('main ul').append(getListItem(2, "Onion"));
-		$('main ul').append(getListItem(3, "Juice"));
-		$('main ul').append(getListItem(4, "Bread"));
+		
+		$.get("/list/my", function (data) {
+			var itemListLength = data.length;
+			for (var i = 0; i < itemListLength; i++) {
+				$('main ul').append(getListItem(i, data[i]));			
+			}
+		});
 	})();
 
 	function getListItem(index, text) {
-		return '<li>' + text + '<input class="checkbox" name="checkbox' + index + '" value="value' + index + '" type="checkbox"></li>';
+		var controlIndex = index + 1;
+		return '<li>' + text + '<input class="checkbox" name="checkbox' + controlIndex + 
+			'" value="value' + controlIndex + '" type="checkbox"></li>';
 	}
 
 });
