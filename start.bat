@@ -1,0 +1,1 @@
+SET DEBUG=listapp:* & npm start
