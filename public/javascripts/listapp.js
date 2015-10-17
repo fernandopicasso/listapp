@@ -5,10 +5,11 @@ $(document).ready(function () {
 	(function () {
 		$('main ul li').remove();
 		
-		$.get("/list/my", function (data) {
-			var itemListLength = data.length;
+		$.get("/list/fernando", function (data) {
+			var dataList = data.data;
+			var itemListLength = dataList.length;
 			for (var i = 0; i < itemListLength; i++) {
-				$('main ul').append(getListItem(i, data[i]));			
+				$('main ul').append(getListItem(i, dataList[i]));			
 			}
 		});
 	})();
@@ -18,5 +19,4 @@ $(document).ready(function () {
 		return '<li>' + text + '<input class="checkbox" name="checkbox' + controlIndex + 
 			'" value="value' + controlIndex + '" type="checkbox"></li>';
 	}
-
 });

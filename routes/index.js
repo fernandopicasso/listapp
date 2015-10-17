@@ -10,10 +10,21 @@ router.get('/my', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/list/my', function (req, res) {
-  res.json(["Milk", "Onion", "Juice", "Bread"]);
+router.get('/list/:name', function (req, res) {
+	var fs = require('fs');
+	var data = JSON.parse(fs.readFileSync('data/data.json', 'utf8'));
+	
+	var dataLength = data.length;
+
+	for (var i = 0; i < dataLength; i++) {
+		var current = data[i];
+		if (req.params.name === current.username) {
+			return res.json(current);
+		}
+	}	
+	
+  	res.statusCode = 404;
+    return res.send('Error 404: Invalid username');
 });
-
-
 
 module.exports = router;
