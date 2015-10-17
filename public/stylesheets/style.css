@@ -8,7 +8,7 @@ a {
 	color: #00B7FF;
 }
 
-.header {
+header {
 	width: 100%;
 	overflow: hidden;
 	top: 1%;
@@ -31,10 +31,16 @@ a {
 	float: left;
 }
 
-.footer {
+footer {
 	background-color: #DDDDDD;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 	text-align: right;
 	height: 3%;
-	vertical-align: bottom;		
+	vertical-align: bottom;
+	color: #666666;
+}
+
+main {
+	background-color: #EEEEEE;
+	height: 90%;
 }
