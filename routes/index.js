@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var listapp = require('../listapp.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -11,8 +12,6 @@ router.get('/my', function(req, res, next) {
 });
 
 router.get('/list/:name', function (req, res) {
-	var listapp = require('../listapp.js');
-	console.log(listapp);
 	var data = listapp.getListForUser(req.params.name, 'data/data.json');
 	if (typeof data !== 'undefined') {
 		return res.json(data);

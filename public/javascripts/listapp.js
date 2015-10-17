@@ -1,22 +1,32 @@
+var dataList = ["foo"];
 
 $(document).ready(function () {
 		
 	// Dynamically generate list
-	(function () {
-		$('main ul li').remove();
-		
+	(function () {		
 		$.get("/list/fernando", function (data) {
-			var dataList = data.data;
-			var itemListLength = dataList.length;
-			for (var i = 0; i < itemListLength; i++) {
-				$('main ul').append(getListItem(i, dataList[i]));			
-			}
-		});
-	})();
+			dataList = data.data;
+			updateList();
+		});		
+	})();	
+});
 
-	function getListItem(index, text) {
-		var controlIndex = index + 1;
-		return '<li>' + text + '<input class="checkbox" name="checkbox' + controlIndex + 
-			'" value="value' + controlIndex + '" type="checkbox"></li>';
+function getListItem(index, text) {
+	var controlIndex = index + 1;
+	return '<li>' + text + '<input class="checkbox" name="checkbox' + controlIndex + 
+		'" value="value' + controlIndex + '" type="checkbox"></li>';
+}
+
+function updateList() {
+	$('main ul li').remove();
+	var itemListLength = dataList.length;
+	for (var i = 0; i < itemListLength; i++) {
+		$('main ul').append(getListItem(i, dataList[i]));
 	}
+}
+
+$("#addItem").click(function() {
+	var nextIndex = dataList.length + 1;
+	dataList.push("New Item");
+	updateList();
 });

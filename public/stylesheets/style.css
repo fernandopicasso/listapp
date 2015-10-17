@@ -38,7 +38,6 @@ header {
 
 .checkbox {
 	float: right;
-
 }
 
 footer {
@@ -58,8 +57,7 @@ footer div {
 }
 
 main ul {
-	list-style: none outside none;
-	width: 60%;
+	list-style: none outside none;	
 }
 
 main ul li {
@@ -75,4 +73,12 @@ main {
 	padding:10px;
 	padding-bottom:10px;
 	min-height:100%;
+	width: 60%;
+}
+
+button {
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	background-color: #1178FF;
+	color: #00D9FF;
+	float: right;	
 }
