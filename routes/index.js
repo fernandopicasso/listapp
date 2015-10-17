@@ -11,17 +11,12 @@ router.get('/my', function(req, res, next) {
 });
 
 router.get('/list/:name', function (req, res) {
-	var fs = require('fs');
-	var data = JSON.parse(fs.readFileSync('data/data.json', 'utf8'));
-	
-	var dataLength = data.length;
-
-	for (var i = 0; i < dataLength; i++) {
-		var current = data[i];
-		if (req.params.name === current.username) {
-			return res.json(current);
-		}
-	}	
+	var listapp = require('../listapp.js');
+	console.log(listapp);
+	var data = listapp.getListForUser(req.params.name, 'data/data.json');
+	if (typeof data !== 'undefined') {
+		return res.json(data);
+	}
 	
   	res.statusCode = 404;
     return res.send('Error 404: Invalid username');
