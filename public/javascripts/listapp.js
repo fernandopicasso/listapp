@@ -25,8 +25,15 @@ function updateList() {
 	}
 }
 
-$("#addItem").click(function() {
-	var nextIndex = dataList.length + 1;
-	dataList.push("New Item");
-	updateList();
+$("#newItemText").keypress(function(e) {
+    if(e.which == 13) {
+    	var enteredValue = this.value.trim();
+    	if (enteredValue.length > 0) {
+	    	e.preventDefault();
+	        var nextIndex = dataList.length + 1;
+			dataList.push(enteredValue);
+			updateList();
+		}
+		this.value = '';
+    }
 });

@@ -57,12 +57,14 @@ footer div {
 }
 
 main ul {
-	list-style: none outside none;	
+	list-style: none outside none;
+	margin-top: 3px;
 }
 
 main ul li {
 	border: 1px solid #999999;
 	margin: 0 0 3px 0;
+	padding-left: 3px;
 }
 
 main ul li:hover {
@@ -76,9 +78,8 @@ main {
 	width: 60%;
 }
 
-button {
+#newItemText {
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	background-color: #1178FF;
-	color: #00D9FF;
-	float: right;	
+	width: 92%;
+	margin-left: 7%;
 }
