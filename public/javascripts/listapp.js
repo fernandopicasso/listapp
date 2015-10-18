@@ -1,4 +1,5 @@
 var dataList = ["foo"];
+var username = "fernando";
 
 $(document).ready(function () {
 		
@@ -33,7 +34,16 @@ $("#newItemText").keypress(function(e) {
 	        var nextIndex = dataList.length + 1;
 			dataList.push(enteredValue);
 			updateList();
+
+			$.ajax({
+			    type: "PUT",
+			    url: "/list/fernando",
+			    contentType: "application/json",
+			    data: JSON.stringify(dataList)
+			});
+
 		}
 		this.value = '';
     }
 });
+
