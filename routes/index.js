@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var listapp = require('../listapp.js');
+var listapp = require('../listappServer.js');
 var datafile = 'data/data.json';
 
 /* GET home page. */
