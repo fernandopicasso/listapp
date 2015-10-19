@@ -1,7 +1,8 @@
 'use strict';
 
 $(document).ready(function () {
-	var dataList = ["foo"];
+	// var dataList = ["foo"];
+	var dataList = [];
 	var username = "fernando";
 
 	var getListItem = function (index, text) {
@@ -18,11 +19,13 @@ $(document).ready(function () {
 		}
 		$.ajax({
 		    type: "PUT",
-		    url: "/list/fernando",
+		    url: "/list/" + username,
 		    contentType: "application/json",
 		    data: JSON.stringify(dataList)
 		});
 	};
+
+	$(".username").text(username);
 
 	// Add keypress handler for adding new items to list
 	$("#newItemText").keypress(function(e) {
