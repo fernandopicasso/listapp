@@ -1,3 +1,5 @@
+'use strict';
+
 exports.getListForUser = function (username, datafile) {
 	var fs = require('fs');
 	var data = JSON.parse(fs.readFileSync(datafile, 'utf8'));

@@ -1,49 +1,63 @@
-var dataList = ["foo"];
-var username = "fernando";
+'use strict';
 
 $(document).ready(function () {
-		
+	var dataList = ["foo"];
+	var username = "fernando";
+
+	var getListItem = function (index, text) {
+		var controlIndex = index + 1;
+		return '<li>' + text + '<input class="checkbox" name="checkbox' + controlIndex + 
+			'" value="value' + controlIndex + '" type="checkbox"></li>';
+	};
+
+	var updateList = function () {
+		$('main ul li').remove();
+		var itemListLength = dataList.length;
+		for (var i = 0; i < itemListLength; i++) {
+			$('main ul').append(getListItem(i, dataList[i]));
+		}
+		$.ajax({
+		    type: "PUT",
+		    url: "/list/fernando",
+		    contentType: "application/json",
+		    data: JSON.stringify(dataList)
+		});
+	};
+
+	// Add keypress handler for adding new items to list
+	$("#newItemText").keypress(function(e) {
+	    if(e.which == 13) {
+	    	var enteredValue = this.value.trim();
+	    	if (enteredValue.length > 0) {
+		    	e.preventDefault();
+		        var nextIndex = dataList.length + 1;
+				dataList.push(enteredValue);
+				updateList();			
+			}
+			this.value = '';
+	    }
+	});
+
 	// Dynamically generate list
 	(function () {		
-		$.get("/list/fernando", function (data) {
+		$.get("/list/" + username, function (data) {
 			dataList = data.data;
 			updateList();
 		});		
-	})();	
-});
+	})();
 
-function getListItem(index, text) {
-	var controlIndex = index + 1;
-	return '<li>' + text + '<input class="checkbox" name="checkbox' + controlIndex + 
-		'" value="value' + controlIndex + '" type="checkbox"></li>';
-}
+	// var checkboxes = $(".checkbox");
+	// console.log(checkboxes);	
+	$(document).on('change', '.checkbox', function () {
+		if ($(this).is(":checked")) {
+			var checkedValue = $(this).parent().text();
 
-function updateList() {
-	$('main ul li').remove();
-	var itemListLength = dataList.length;
-	for (var i = 0; i < itemListLength; i++) {
-		$('main ul').append(getListItem(i, dataList[i]));
-	}
-}
+			var itemIndex = dataList.indexOf(checkedValue);
+			if (itemIndex > -1) {
+				dataList.splice(itemIndex, 1);
+			}
 
-$("#newItemText").keypress(function(e) {
-    if(e.which == 13) {
-    	var enteredValue = this.value.trim();
-    	if (enteredValue.length > 0) {
-	    	e.preventDefault();
-	        var nextIndex = dataList.length + 1;
-			dataList.push(enteredValue);
 			updateList();
-
-			$.ajax({
-			    type: "PUT",
-			    url: "/list/fernando",
-			    contentType: "application/json",
-			    data: JSON.stringify(dataList)
-			});
-
 		}
-		this.value = '';
-    }
+	});
 });
-
