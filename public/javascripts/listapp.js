@@ -1,21 +1,25 @@
 'use strict';
 
+function Client() {
+	return {
+		getListItem: function (index, text) {
+			var controlIndex = index + 1;
+			return '<li>' + text + '<input class="checkbox" name="checkbox' + controlIndex + 
+				'" value="value' + controlIndex + '" type="checkbox"></li>';
+		}
+	};
+}
+
 $(document).ready(function () {
-	// var dataList = ["foo"];
 	var dataList = [];
 	var username = "fernando";
-
-	var getListItem = function (index, text) {
-		var controlIndex = index + 1;
-		return '<li>' + text + '<input class="checkbox" name="checkbox' + controlIndex + 
-			'" value="value' + controlIndex + '" type="checkbox"></li>';
-	};
+	var client = Client();
 
 	var updateList = function () {
 		$('main ul li').remove();
 		var itemListLength = dataList.length;
 		for (var i = 0; i < itemListLength; i++) {
-			$('main ul').append(getListItem(i, dataList[i]));
+			$('main ul').append(client.getListItem(i, dataList[i]));
 		}
 		$.ajax({
 		    type: "PUT",
