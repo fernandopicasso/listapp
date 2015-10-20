@@ -13,12 +13,10 @@
     ]
   },
   {
-    "username": "foo",
+    "username": "test",
     "data": [
       "Coffee",
-      "Tea",
-      "Butter",
-      "Fish"
+      "Tea"
     ]
   }
 ]
